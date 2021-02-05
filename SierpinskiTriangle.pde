@@ -1,39 +1,27 @@
+class sierpinskiRing {
 
-public int limit = 20;
-class sierpinskiProgram {
-  
-  sierpinskiProgram() {//constructor
+  public void sierpinski(int x, int y, int max, int min,int red, int green) {
+    //Changes shade of blue each recursion
+    fill(red,green,255);
+    //displays current recursion shape
+    ellipse(x,y,max,max);
+    //checks if there is another possible recursion
+    if(max >= min) {
+      //adjusts shape and declares next recursion 
+     sierpinski(x-(max/4),y,max/2,min, red + 20, green + 20); 
+    }
     
-  }
-
-  public void sierpinski(int x, int y, int len) 
-  {
-    if (len <= limit) {
-      triangle(x, y, x + len, y, x + (len/2), y - len);
-    } else {
-      sierpinski(x, y, len/2);
-      sierpinski(x + (len/2), y, len/2);
-      sierpinski(x+(len/4), y-(len/2), len/2);
-    }
-  }
-}
-sierpinskiProgram Ari = new sierpinskiProgram();
-
-public void setup()
-{
-  size(400, 400);
-}
-public void draw()
-{
-  Ari.sierpinski(10, 380, 380);
-}
-public void mouseDragged()//optional
-  {
-    limit = 400 - mouseX;
-    if(limit <= 0) {
-     limit = 1; 
-    }
       
-    //System.out.println(mouseX);
+      
+    }
   }
 
+sierpinskiRing Ari = new sierpinskiRing();
+public void setup() {
+  size(400, 400);
+  noStroke();
+}
+public void draw() {
+  Ari.sierpinski(200, 200, 400,10,0,162);
+  //ellipse(200,200, 100, 100);
+}
